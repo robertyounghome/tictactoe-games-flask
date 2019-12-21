@@ -1,3 +1,18 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+function move(id) {
+$.ajax({
+url:"move", //the page containing python script
+type: "post", //request type,
+dataType: 'json',
+data: {caller: id},
+success:function(result){
+  document.getElementById(result.caller).innerHTML= result.value
+      }
+    });
+   } 
+</script>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,20 +22,20 @@
 <h1>Tic Tac Toe</h1>
 <table>
   <tr>
-    <td><button class="button"></button></td>
-    <td class="vert"><button class="button"></button></td>
-    <td><button class="button"></button></td>
+    <td><button class="button" id="button00" onclick="move(this.id)"></button></td>
+    <td class="vert"><button class="button" id="button01" onclick="move(this.id)"></button></td>
+    <td><button class="button" id="button02" onclick="move(this.id)"></button></td>
   </tr>
   <tr>
     <td class="hori">
-    <button class="button"></button></td>
-    <td class="vert hori"><button class="button"></button></td>
-    <td class="hori"><button class="button"></button></td>
+    <button class="button" id="button10" onclick="move(this.id)"></button></td>
+    <td class="vert hori"><button class="button" id="button11" onclick="move(this.id)"></button></td>
+    <td class="hori"><button class="button" id="button12" onclick="move(this.id)"></button></td>
   </tr>
   <tr>
-    <td><button class="button"></button></td>
-    <td class="vert"><button class="button"></button></td>
-    <td><button class="button"></button></td>
+    <td><button class="button" id="button20" onclick="move(this.id)"></button></td>
+    <td class="vert"><button class="button" id="button21" onclick="move(this.id)"></button></td>
+    <td><button class="button" id="button22" onclick="move(this.id)"></button></td>
   </tr>
 </table>
 </body>

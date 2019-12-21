@@ -1,15 +1,17 @@
 from flask import Flask
-from flask import render_template, request, redirect
+from flask import render_template, request, redirect, jsonify
+from tictactoe import TicTacToe
 
 app = Flask(__name__, template_folder='')
 app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
+tictactoe = TicTacToe()
 
 @app.route('/', methods=['GET', 'POST'])
-def hello_world():
+def index():
     return render_template('index.html')
 
-@app.route('/tictactoe', methods=['GET', 'POST'])
-def first_name():
+@app.route('/pick_game', methods=['GET', 'POST'])
+def pick_game():
     yourname = request.form['yourname']
     game = request.form['game']
     if game == 'tictactoe':
@@ -17,11 +19,18 @@ def first_name():
     else:
     	return render_template('minesweeper.html', name = yourname)
 
+@app.route('/move', methods=['GET', 'POST'])
+def move():
+    caller = request.form.get('caller')
+    h = tictactoe.player_move(int(caller[-1]), int(caller[-2]))
+    h['caller'] = caller
+    return jsonify(h)
+
 @app.after_request
 def add_header(r):
     """
     Add headers to both force latest IE rendering engine or Chrome Frame,
-    and also to cache the rendered page for 10 minutes.
+    and also to cache the rendered page for -- minutes.
     """
     r.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
     r.headers["Pragma"] = "no-cache"
