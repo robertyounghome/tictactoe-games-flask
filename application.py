@@ -26,6 +26,14 @@ def move():
     h['caller'] = caller
     return jsonify(h)
 
+@app.route('/computer_move', methods=['GET', 'POST'])
+def computer_move():
+    print('inside computer move')
+    # caller = request.form.get('caller')
+    h = tictactoe.computer_move()
+    print(h)
+    return jsonify(h)
+
 @app.after_request
 def add_header(r):
     """

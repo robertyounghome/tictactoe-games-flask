@@ -4,7 +4,7 @@ class TicTacToe:
 	def __init__(self, name="Player"):
 		self.name = name
 		self.board = [[''] * 3 for _ in range(3)]
-		self.moves = [[(i,j) for i in range(3)] for j in range(3)]
+		self.moves = [(i,j) for i,j in zip(range(3),range(3))]
 
 	def print_board(self):
 		for i in range(3):
@@ -53,11 +53,14 @@ class TicTacToe:
 		return {'value': 'X', 'result': r}
 
 	def computer_move(self):
-		k = random.randint(len(self.moves))
+		print(self.moves)
+		k = random.randint(0,len(self.moves))
 		i, j = self.moves[k]
 		self.board[i][j] = 'O'
 		del self.moves[k]
-		self.check_board()
+		r = self.check_board()
+		caller = f"button{i}{j}"
+		return {'caller': caller, 'value': 'O', 'result': r}
 
 if __name__ == '__main__':
 	game = TicTacToe()

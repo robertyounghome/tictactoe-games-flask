@@ -1,16 +1,25 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
 function move(id) {
-$.ajax({
-url:"move", //the page containing python script
-type: "post", //request type,
-dataType: 'json',
-data: {caller: id},
-success:function(result){
-  document.getElementById(result.caller).innerHTML= result.value
-      }
-    });
-   } 
+  $.ajax({
+    url:"move",
+    type: "post",
+    dataType: 'json',
+    data: {caller: id},
+    success:function(result){
+      document.getElementById(result.caller).innerHTML= result.value
+      $.ajax({
+        url:"computer_move",
+        type: "post",
+        dataType: 'json',
+        data: {caller: id},
+        success:function(result){
+          document.getElementById(result.caller).innerHTML= result.value
+        }
+      });
+    }
+  });
+}
 </script>
 
 <!DOCTYPE html>
