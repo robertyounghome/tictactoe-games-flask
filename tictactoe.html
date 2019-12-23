@@ -1,23 +1,5 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-function exit() {
-  $.ajax({
-    url:"/",
-    type: "post",
-    dataType: 'json',
-    data: {},
-    success:function(result){
-      // for (i=0; i < 3; i++) {
-      //   for (j=0; j < 3; j++) {
-      //     id = "button"+i+j
-      //     document.getElementById(id).innerHTML = ""
-      //     document.getElementById(id).className = "button"
-      //   }
-      // }
-      // document.getElementById("result").innerHTML = ""
-    }
-  });
-}
 
 function reset() {
   $.ajax({
@@ -97,7 +79,8 @@ function move(button) {
   <tr>
     <td colspan="3" align="center">
         <button id="reset" onclick="reset()">New Game</button>
-        <button id="exit" onclick="exit()">Exit</button>
+        <br><br>
+        <form action="index", method="POST"><a href="#" onclick="this.parentNode.submit();">Return to Game Selection</a></form>
     </td>
   </tr>
 </table>

@@ -7,6 +7,7 @@ app.config['SEND_FILE_MAX_AGE_DEFAULT'] = 0
 tictactoe = TicTacToe()
 
 @app.route('/', methods=['GET', 'POST'])
+@app.route('/index', methods=['GET', 'POST'])
 def index():
     return render_template('index.html')
 

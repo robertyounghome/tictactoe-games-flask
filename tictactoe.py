@@ -55,6 +55,7 @@ class TicTacToe:
 		return a[r]
 
 	# Interacts with the application controller
+	# Makes a move for the player
 	def player_move(self, i, j):
 		self.board[i][j] = 'X'
 		print(i,j)
@@ -63,6 +64,8 @@ class TicTacToe:
 		r = self.check_board()
 		return {'value': 'X', 'result': r}
 
+	# Interacts with the application controller
+	# Makes a move for the computer
 	def computer_move(self):
 		k = random.randint(0,len(self.moves) - 1)
 		print(k)
