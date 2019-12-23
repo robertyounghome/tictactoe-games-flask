@@ -26,5 +26,30 @@ table {
   text-decoration: none;
   display: inline-block;
   font-size: 32px;
+  pointer-events: auto
+}
+.buttonx {
+  background-color: #FFFFFF;
+  border: none;
+  color: blue;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 32px;
+  pointer-events: none;
+}
+.buttono {
+  background-color: #FFFFFF;
+  border: none;
+  color: red;
+  width: 100px;
+  height: 100px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 32px;
+  pointer-events: none;
 }
 button:focus {outline:0 !important;}

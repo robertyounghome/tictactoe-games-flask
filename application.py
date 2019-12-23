@@ -15,14 +15,16 @@ def pick_game():
     yourname = request.form['yourname']
     game = request.form['game']
     if game == 'tictactoe':
-    	return render_template('tictactoe.html', name = yourname)
+        tictactoe.setName(yourname)
+        tictactoe.reset()
+        return render_template('tictactoe.html', name = yourname)
     else:
     	return render_template('minesweeper.html', name = yourname)
 
 @app.route('/move', methods=['GET', 'POST'])
 def move():
     caller = request.form.get('caller')
-    h = tictactoe.player_move(int(caller[-1]), int(caller[-2]))
+    h = tictactoe.player_move(int(caller[-2]), int(caller[-1]))
     h['caller'] = caller
     return jsonify(h)
 
@@ -33,6 +35,11 @@ def computer_move():
     h = tictactoe.computer_move()
     print(h)
     return jsonify(h)
+
+@app.route('/reset', methods=['GET', 'POST'])
+def reset():
+    tictactoe.reset()
+    return jsonify({})
 
 @app.after_request
 def add_header(r):

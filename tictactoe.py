@@ -3,8 +3,17 @@ import random
 class TicTacToe:
 	def __init__(self, name="Player"):
 		self.name = name
+		self.reset()
+
+	def reset(self):
 		self.board = [[''] * 3 for _ in range(3)]
-		self.moves = [(i,j) for i,j in zip(range(3),range(3))]
+		self.moves = []
+		for i in range(3):
+			for j in range(3):
+				self.moves.append((i,j))
+
+	def setName(self, name):
+		self.name = name
 
 	def print_board(self):
 		for i in range(3):
@@ -28,36 +37,40 @@ class TicTacToe:
 
 		# Check diagonals	
 		if (self.board[0][0] == self.board[1][1] and self.board[1][1] == self.board[2][2]) or \
-		   (self.board[0][2] == self.board[1][1] and self.board[1][1] == self.board[2][2]):
+		   (self.board[0][2] == self.board[1][1] and self.board[1][1] == self.board[2][0]):
 			if self.board[1][1] == 'X':
 				return 1
 			elif self.board[1][1] == 'O':
 				return 2
 				
-		if counter == 9:
+		if counter == 0:
 			return 3
 		return 0
 
 	def check_board(self):
-		a = ['', 'Player wins!', 'Computer wins', 'Tie Game']
+		a = ['', f"{self.name} wins!", 'Computer wins', 'Tie Game']
 		r = self.game_over()
 		# Add keeping track of stats
-		# Probably return either a blank, Player wins, Computer wins, or Tie Game
+		# Probably return stats as well
 		return a[r]
 
 	# Interacts with the application controller
 	def player_move(self, i, j):
 		self.board[i][j] = 'X'
-		print(self.board)
+		print(i,j)
+		self.moves.remove((i,j))
+		print(self.moves)
 		r = self.check_board()
 		return {'value': 'X', 'result': r}
 
 	def computer_move(self):
-		print(self.moves)
-		k = random.randint(0,len(self.moves))
+		k = random.randint(0,len(self.moves) - 1)
+		print(k)
 		i, j = self.moves[k]
+		print(i,j)
 		self.board[i][j] = 'O'
 		del self.moves[k]
+		print(self.moves)
 		r = self.check_board()
 		caller = f"button{i}{j}"
 		return {'caller': caller, 'value': 'O', 'result': r}

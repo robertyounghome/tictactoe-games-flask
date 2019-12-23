@@ -1,25 +1,71 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
-function move(id) {
+function exit() {
   $.ajax({
-    url:"move",
+    url:"/",
     type: "post",
     dataType: 'json',
-    data: {caller: id},
+    data: {},
     success:function(result){
-      document.getElementById(result.caller).innerHTML= result.value
-      $.ajax({
-        url:"computer_move",
-        type: "post",
-        dataType: 'json',
-        data: {caller: id},
-        success:function(result){
-          document.getElementById(result.caller).innerHTML= result.value
-        }
-      });
+      // for (i=0; i < 3; i++) {
+      //   for (j=0; j < 3; j++) {
+      //     id = "button"+i+j
+      //     document.getElementById(id).innerHTML = ""
+      //     document.getElementById(id).className = "button"
+      //   }
+      // }
+      // document.getElementById("result").innerHTML = ""
     }
   });
 }
+
+function reset() {
+  $.ajax({
+    url:"reset",
+    type: "post",
+    dataType: 'json',
+    data: {},
+    success:function(result){
+      for (i=0; i < 3; i++) {
+        for (j=0; j < 3; j++) {
+          id = "button"+i+j
+          document.getElementById(id).innerHTML = ""
+          document.getElementById(id).className = "button"
+        }
+      }
+      document.getElementById("result").innerHTML = ""
+    }
+  });
+}
+
+function move(button) {
+  if (document.getElementById("result").innerHTML == "") {
+      $.ajax({
+        url:"move",
+        type: "post",
+        dataType: 'json',
+        data: {caller: button.id},
+        success:function(result){
+          document.getElementById(result.caller).innerHTML = result.value
+          document.getElementById(result.caller).className = "buttonx"
+          document.getElementById("result").innerHTML = result.result
+          if (result.result == "") {
+            $.ajax({
+                url:"computer_move",
+                type: "post",
+                dataType: 'json',
+                data: {caller: button.id},
+                success:function(result2){
+                  document.getElementById(result2.caller).className = "buttono"
+                  document.getElementById(result2.caller).innerHTML = result2.value
+                  document.getElementById("result").innerHTML = result2.result
+                }
+            });
+          }
+        }
+      });
+    }
+  }
 </script>
 
 <!DOCTYPE html>
@@ -28,24 +74,36 @@ function move(id) {
   <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" />
 </head>
 <body>
+<div id="game">
 <h1>Tic Tac Toe</h1>
 <table>
   <tr>
-    <td><button class="button" id="button00" onclick="move(this.id)"></button></td>
-    <td class="vert"><button class="button" id="button01" onclick="move(this.id)"></button></td>
-    <td><button class="button" id="button02" onclick="move(this.id)"></button></td>
+    <td><button class="button" id="button00" onclick="move(this)"></button></td>
+    <td class="vert"><button class="button" id="button01" onclick="move(this)"></button></td>
+    <td><button class="button" id="button02" onclick="move(this)"></button></td>
   </tr>
   <tr>
     <td class="hori">
-    <button class="button" id="button10" onclick="move(this.id)"></button></td>
-    <td class="vert hori"><button class="button" id="button11" onclick="move(this.id)"></button></td>
-    <td class="hori"><button class="button" id="button12" onclick="move(this.id)"></button></td>
+    <button class="button" id="button10" onclick="move(this)"></button></td>
+    <td class="vert hori"><button class="button" id="button11" onclick="move(this)"></button></td>
+    <td class="hori"><button class="button" id="button12" onclick="move(this)"></button></td>
   </tr>
   <tr>
-    <td><button class="button" id="button20" onclick="move(this.id)"></button></td>
-    <td class="vert"><button class="button" id="button21" onclick="move(this.id)"></button></td>
-    <td><button class="button" id="button22" onclick="move(this.id)"></button></td>
+    <td><button class="button" id="button20" onclick="move(this)"></button></td>
+    <td class="vert"><button class="button" id="button21" onclick="move(this)"></button></td>
+    <td><button class="button" id="button22" onclick="move(this)"></button></td>
+  </tr>
+  <br><br>
+  <tr>
+    <td colspan="3" align="center">
+        <button id="reset" onclick="reset()">New Game</button>
+        <button id="exit" onclick="exit()">Exit</button>
+    </td>
   </tr>
 </table>
+</div>
+<div>
+    <p id="result"></p>
+</div>
 </body>
 </html>
