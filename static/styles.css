@@ -1,11 +1,7 @@
 h1 {
   text-align: center;
 }
-td {
-  width: 100px;
-  height: 100px;
-}
-table {
+table.table1 {
   margin: 5px auto;
 }
 .vert {
@@ -52,4 +48,46 @@ table {
   font-size: 32px;
   pointer-events: none;
 }
+table.table2 {
+  margin: 5px auto;
+  padding: 0;
+}
+.mine_button {
+  background-color: #CCCCCC;
+  border-radius: 2px;
+  border: none;
+  color: blue;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number {
+  background-color: #BBBBBB;
+  border: 1px solid #000000;
+  color: blue;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_bomb {
+  background-color: red;
+  border: 1px solid #000000;
+  color: blue;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+
 button:focus {outline:0 !important;}

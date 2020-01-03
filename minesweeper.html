@@ -1,0 +1,85 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script>
+
+function reset() {
+  $.ajax({
+    url:"mine_reset",
+    type: "post",
+    dataType: 'json',
+    data: {},
+    success:function(result){
+      for (i=0; i < result['board_size']; i++) {
+        for (j=0; j < result['board_size']; j++) {
+          id = "button-"+i+"-"+j
+          document.getElementById(id).innerHTML = ""
+          document.getElementById(id).className = "mine_button"
+        }
+      }
+      document.getElementById("result").innerHTML = ""
+    }
+  });
+}
+
+function move(button) {
+  if (document.getElementById(button.id).className == "mine_button" && document.getElementById("result").innerHTML == "") {
+      $.ajax({
+        url:"mine_move",
+        type: "post",
+        dataType: 'json',
+        data: {caller: button.id},
+        success:function(result){
+          document.getElementById("result").innerHTML = result['result']
+          // document.getElementById(result.caller).className = "mine_blank"
+          for (k in result['updates']) {
+            value = result['updates'][k]
+            document.getElementById("button-"+k).className = "mine_blank"
+            document.getElementById("button-"+k).innerHTML = ""
+            if (value == '0') {
+              document.getElementById("button-"+k).className = "mine_number"                         
+            }
+            else if (['1','2','3','4','5','6','7','8'].includes(value)) {
+              document.getElementById("button-"+k).className = "mine_number"
+              document.getElementById("button-"+k).innerHTML = value 
+            }
+            else if (value == '*') {
+              document.getElementById("button-"+k).className = 'mine_bomb'
+            }
+          }
+          
+        }
+      });
+    }
+  }
+</script>
+
+<!DOCTYPE html>
+<html>
+<head>
+  <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" />
+</head>
+<body>
+<div id="game">
+<h1>Minesweeper</h1>
+<table class="table2">
+{%for i in range(board_size)%} 
+<tr>
+    {%for j in range(board_size)%} 
+    <td><button class="mine_button" id="button-{{i}}-{{j}}" onclick="move(this)"></button></td>  
+    {%endfor%} 
+</tr> 
+{%endfor%} 
+  <br><br>
+  <tr>
+    <td colspan="{{board_size}}" align="center">
+        <button id="reset" onclick="reset()">New Game</button>
+        <br><br>
+        <form action="index", method="POST"><a href="#" onclick="this.parentNode.submit();">Return to Game Selection</a></form>
+    </td>
+  </tr>  
+</table> 
+</div>
+<div>
+    <p id="result"></p>
+</div>  
+</body> 
+</html> 
