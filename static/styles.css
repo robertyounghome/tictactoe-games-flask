@@ -53,10 +53,12 @@ table.table2 {
   padding: 0;
 }
 .mine_button {
-  background-color: #CCCCCC;
-  border-radius: 2px;
-  border: none;
-  color: blue;
+  border: 1px solid grey;
+  float: left;
+  box-shadow: 0 2px 0 0 black;
+  border-radius: 3px;
+  margin: 0;
+  background-color: #DDDDDD;
   width: 16px;
   height: 16px;
   text-align: center;
@@ -65,24 +67,132 @@ table.table2 {
   font-size: 12px;
   pointer-events: auto
 }
-.mine_number {
-  background-color: #BBBBBB;
-  border: 1px solid #000000;
-  color: blue;
-  width: 16px;
+.mine_flag {
+  border: 1px solid grey;
+  background-image: url("/static/flag.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
   height: 16px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 12px;
-  pointer-events: auto
+  width: 16px;
 }
 .mine_bomb {
-  background-color: red;
+  border: 1px solid grey;
+  background-image: url("/static/bomb.png");
+  background-repeat: no-repeat;
+  background-position: 50% 50%;
+  height: 16px;
+  width: 16px;
+}
+.mine_number_0 {
+  background-color: #CCCCCC;
   border: 1px solid #000000;
-  color: blue;
   width: 16px;
   height: 16px;
+  color: blue;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number_1 {
+  font-family: "Impact";
+  background-color: #CCCCCC;
+  border: 1px solid #000000;
+  width: 16px;
+  height: 16px;
+  color: blue;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number_2 {
+  font-family: "Impact";
+  background-color: #CCCCCC;
+  border: 1px solid #000000;
+  width: 16px;
+  height: 16px;
+  color: green;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number_3 {
+  font-family: "Impact";
+  background-color: #CCCCCC;
+  border: 1px solid #000000;
+  width: 16px;
+  height: 16px;
+  color: red;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number_4 {
+  font-family: "Impact";
+  background-color: #CCCCCC;
+  border: 1px solid #000000;
+  width: 16px;
+  height: 16px;
+  color: darkblue;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number_5 {
+  font-family: "Impact";
+  background-color: #CCCCCC;
+  border: 1px solid #000000;
+  width: 16px;
+  height: 16px;
+  color: brown;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number_6 {
+  font-family: "Impact";
+  background-color: #CCCCCC;
+  border: 1px solid #000000;
+  width: 16px;
+  height: 16px;
+  color: cyan;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number_7 {
+  font-family: "Impact";
+  background-color: #CCCCCC;
+  border: 1px solid #000000;
+  width: 16px;
+  height: 16px;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 12px;
+  pointer-events: auto
+}
+.mine_number_8 {
+  font-family: "Impact";
+  background-color: #CCCCCC;
+  border: 1px solid #000000;
+  width: 16px;
+  height: 16px;
+  color: grey;
   text-align: center;
   text-decoration: none;
   display: inline-block;

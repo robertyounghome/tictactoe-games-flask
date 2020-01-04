@@ -7,7 +7,7 @@ BOMB = '*'
 class Minesweeper:
 	def __init__(self, name="Player"):
 		self.name = name
-		self.complexity = [(8,10),(16,24),(24,99)]
+		self.complexity = [(8,10),(16,40),(24,99)]
 		self.level = 1
 		self.reset()
 

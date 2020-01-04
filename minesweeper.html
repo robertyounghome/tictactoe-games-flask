@@ -1,5 +1,11 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 <script>
+function flag(button) {
+  if (document.getElementById(button.id).className == "mine_button")
+    document.getElementById(button.id).className="mine_flag"
+  else
+    document.getElementById(button.id).className="mine_button"
+}
 
 function reset() {
   $.ajax({
@@ -35,10 +41,11 @@ function move(button) {
             document.getElementById("button-"+k).className = "mine_blank"
             document.getElementById("button-"+k).innerHTML = ""
             if (value == '0') {
-              document.getElementById("button-"+k).className = "mine_number"                         
+              document.getElementById("button-"+k).className = "mine_number_"+value                     
             }
             else if (['1','2','3','4','5','6','7','8'].includes(value)) {
-              document.getElementById("button-"+k).className = "mine_number"
+              document.getElementById("button-"+k).className = "mine_number_"+value
+              // document.getElementById("button-"+k).style.color = "green"
               document.getElementById("button-"+k).innerHTML = value 
             }
             else if (value == '*') {
@@ -58,13 +65,13 @@ function move(button) {
   <link href="{{ url_for('static', filename='styles.css') }}" rel="stylesheet" />
 </head>
 <body>
-<div id="game">
+<div id="game" oncontextmenu="return false;">
 <h1>Minesweeper</h1>
 <table class="table2">
 {%for i in range(board_size)%} 
 <tr>
     {%for j in range(board_size)%} 
-    <td><button class="mine_button" id="button-{{i}}-{{j}}" onclick="move(this)"></button></td>  
+    <td><button type="button" class="mine_button" id="button-{{i}}-{{j}}" onclick="move(this)" oncontextmenu="flag(this)"></input></td> 
     {%endfor%} 
 </tr> 
 {%endfor%} 
@@ -79,7 +86,9 @@ function move(button) {
 </table> 
 </div>
 <div>
-    <p id="result"></p>
+  <p id="mines"></p>
+  <p id="timer"></p>
+  <p id="result"></p>
 </div>  
 </body> 
 </html> 
